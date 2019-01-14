@@ -1,23 +1,40 @@
-const express = require('express'),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    cors = require('cors'),
-    mongoose = require('mongoose'),
-    config = require('./DB');
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+const express = require('express')
 
-const businessRoute = require('./routes/business.route');
-mongoose.Promise = global.Promise;
-mongoose.connect(config.DB, { useNewUrlParser: true }).then(
-  () => {console.log('Database is connected') },
-  err => { console.log('Can not connect to the database'+ err)}
-);
+const path = require('path')
 
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-app.use('/business', businessRoute);
-const port = process.env.PORT || 4000;
+const bodyParser = require('body-parser')
 
-const server = app.listen(port, function(){
-  console.log('Listening on port ' + port);
-});
+const cors = require('cors')
+
+const mongoose = require('mongoose')
+
+const config = require('./DB')
+
+const businessRoute = require('./routes/business.route')
+
+mongoose.Promise = global.Promise
+mongoose
+  .connect(
+    config.DB,
+    { useNewUrlParser: true }
+  )
+  .then(
+    () => {
+      console.log('Database is connected')
+    },
+    err => {
+      console.log(`Can not connect to the database ${err}`)
+    }
+  )
+
+const app = express()
+app.use(bodyParser.json())
+app.use(cors())
+app.use('/business', businessRoute)
+const port = process.env.PORT || 4000
+
+const server = app.listen(port, () => {
+  console.log(`Listening on port ${port}`)
+})

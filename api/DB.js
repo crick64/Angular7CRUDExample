@@ -1,3 +1,4 @@
 module.exports = {
-    DB: 'mongodb://localhost:27017/ng7crud'
- };
+  DB:
+    'mongodb+srv://db-moderator:32dbvHji57Cra2J@asia-singapore-cluster0-axayk.mongodb.net/test?retryWrites=true'
+}
